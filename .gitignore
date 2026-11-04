@@ -1,0 +1,25 @@
+node_modules/
+dist/
+
+# Playwright（E2E）が作る、実行結果のファイル
+**/test-results/
+**/playwright-report/
+
+# Supabase CLI が作る一時ファイル
+**/supabase/.temp/
+**/supabase/.branches/
+# Studio の SQL Editor が保存するスニペット（演習の「git status が空」の確認を妨げないため）
+**/supabase/snippets/
+
+# 運営用メモ（学生に見せない。テンプレートの複製にも入れない）
+_private/
+
+# 環境変数ファイルは絶対にコミットしない（このリポジトリでは使わないが、習慣として除外する）
+.env
+.env.*
+!.env.example
+
+# AI エージェントの、個人用の設定・指示（M6 の演習で作る。Git には入れない）
+.claude/settings.local.json
+CLAUDE.local.md
+.claude/worktrees/

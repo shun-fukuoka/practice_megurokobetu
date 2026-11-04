@@ -1,0 +1,36 @@
+name: 作業（Task）
+description: 1つの変更の単位。PR 1本で終わる大きさにする
+title: "[Task] "
+labels: ["task"]
+body:
+  - type: textarea
+    id: background
+    attributes:
+      label: 背景（なぜ必要か）
+      description: 困っていること、きっかけ。「誰が」「何に」困っているか
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: 完了条件（何ができたら終わりか）
+      description: 第三者が「終わった」と判断できる書き方にする。箇条書き推奨
+      placeholder: |
+        - [ ] ○○が△△のとき、□□になる
+        - [ ] `npm run check` が通る
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: 範囲（やらないこと）
+      description: 今回は触らないもの。迷ったらここに書く
+    validations:
+      required: false
+  - type: textarea
+    id: notes
+    attributes:
+      label: 補足・参考
+      description: 関連する Issue、資料など。秘密・個人情報は書かない
+    validations:
+      required: false

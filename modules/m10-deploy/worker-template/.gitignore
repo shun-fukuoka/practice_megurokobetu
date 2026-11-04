@@ -1,0 +1,9 @@
+node_modules/
+.wrangler/
+
+# 秘密・環境変数のファイルは、絶対にコミットしない
+.env
+.env.*
+.dev.vars
+.dev.vars.*
+!.env.example

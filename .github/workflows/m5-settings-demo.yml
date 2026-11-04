@@ -1,0 +1,39 @@
+name: M5 settings demo
+
+# M5「リポジトリの設定」の演習用。手動で実行する（Actions タブ → Run workflow）。
+# Variables と Secrets が、ワークフローからどう見えるかを観察する。
+#
+# 重要: 演習で登録する値は、すべてダミー。本物の秘密は登録しない。
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  show:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      # 値は env 経由で渡す（式を run の中に直接埋め込まない。詳細は M5 の解説）
+      - name: Show a variable (not secret)
+        env:
+          GREETING: ${{ vars.GREETING }}
+        run: |
+          if [ -z "$GREETING" ]; then
+            echo "GREETING: 未設定"
+          else
+            echo "GREETING: $GREETING"
+          fi
+
+      - name: Show a secret (masked)
+        env:
+          DEMO_SECRET: ${{ secrets.DEMO_SECRET }}
+        run: |
+          if [ -z "$DEMO_SECRET" ]; then
+            echo "DEMO_SECRET: 未設定"
+          else
+            echo "DEMO_SECRET: 設定済み（文字数 ${#DEMO_SECRET}）"
+            echo "値をそのまま出力してみる: $DEMO_SECRET"
+          fi

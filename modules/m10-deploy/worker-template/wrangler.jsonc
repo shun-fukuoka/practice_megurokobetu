@@ -1,0 +1,7 @@
+{
+  // Worker の設定。デプロイ先の名前や、実行環境の版を決める。
+  // 秘密（API トークンなど）は、ここに書かない。
+  "name": "hello-worker-practice",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-29"
+}

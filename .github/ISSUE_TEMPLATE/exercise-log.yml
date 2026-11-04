@@ -1,0 +1,33 @@
+name: 演習の記録（Exercise log）
+description: 演習を始める前に起票し、予想を書く。結果と気づきは、あとでコメントとして追記する
+title: "[演習] "
+labels: ["exercise"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **演習を始める前に**、この Issue を作って「予想」を書いてください（答えや結果を見る前に）。
+        予想は、**AI を使わず、自分の力で**書きます。
+        演習を終えたら、**コメント**で「結果」と「答えを見た後の気づき」を書き足します。最後に、この Issue を閉じます。
+  - type: input
+    id: exercise
+    attributes:
+      label: 演習
+      description: 演習の番号と名前
+      placeholder: "例: M7-1 起動して中を見る／鍵の違い"
+    validations:
+      required: true
+  - type: textarea
+    id: prediction
+    attributes:
+      label: 予想（実行する前の、自分の考え）
+      description: 演習の手順書にある「先に予想を書く」の設問に、自分の言葉で答える。分からなければ「分からない」と書き、理由の見当を添える。間違っていてよい
+    validations:
+      required: true
+  - type: textarea
+    id: unknown
+    attributes:
+      label: 分からないこと（正直に。任意）
+      description: 「ここまでは分かる。ここから分からない」の形で書くと、あとで質問しやすい。分からないことを書けるのは、前に進むための力です
+    validations:
+      required: false

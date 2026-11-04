@@ -1,0 +1,51 @@
+name: Deploy
+
+# main に変更が入ったら、テストを通してから、Cloudflare に公開（デプロイ）する。
+#
+# 必要な Secrets（リポジトリの Settings → Secrets and variables → Actions に、自分で登録する）:
+#   CLOUDFLARE_API_TOKEN    デプロイ用の API トークン（権限は、最小限。M10 の手順書を参照）
+#   CLOUDFLARE_ACCOUNT_ID   デプロイ先のアカウントの ID
+#
+# 重要:
+#   - これらの値を、コード・設定ファイル・チャット・AI に、絶対に書かない（M0）。
+#   - デプロイを実行できるのは、この自動化（CI）だけ。人は、トークンを持たなくても、公開の流れに乗れる。
+on:
+  push:
+    branches:
+      - main
+
+# 同時に 2 つのデプロイが走らないようにする（先に始まったものを、最後まで走らせる）
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      # テストが通らなければ、ここで止まり、公開されない
+      - name: Type check and test
+        run: npm run check
+
+      - name: Deploy Worker
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

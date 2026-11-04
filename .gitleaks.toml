@@ -1,0 +1,5 @@
+title = "dev-onboarding-lab"
+
+# gitleaks の既定ルール（主要サービスのトークンや鍵の形式）をそのまま使う。
+[extend]
+useDefault = true
